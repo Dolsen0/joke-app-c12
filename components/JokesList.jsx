@@ -10,7 +10,7 @@ export default function JokesList() {
   useEffect(() => {
     fetch("https://api.sampleapis.com/jokes/goodJokes")
       .then((res) => res.json())
-      .then(setJokes)
+      .then(shuffleJokes)
       .catch(alert);
   }, []);
 
@@ -22,9 +22,16 @@ export default function JokesList() {
     }
   };
 
+  const shuffleJokes = (arr) => {
+    for(let i = arr.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1))
+      [arr[j], arr[i]] = [arr[i], arr[j]]
+    } 
+    setJokes(arr)
+  }
+
   return (
     <>
-      <Text>Joke: {currentJoke}</Text>
       <Joke joke={!jokes ? "loading..." : jokes[currentJoke].setup} />
       <Punchline punchline={jokes && jokes[currentJoke].punchline} />
       <Button onPress={nextJoke} title="Next Joke" />

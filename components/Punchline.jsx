@@ -12,8 +12,9 @@ export default function Punchline({punchline}) {
   return (
     <>
       <TouchableOpacity onPress={() => setShowPunchline(!showPunchline)}>
-        <View>
-          <Text>{showPunchline ? punchline : "Show Punchline"}</Text>
+        <View style={showPunchline ? styles.punchlineBox : styles.punchlineBoxHidden}/>
+        <View style={showPunchline ? styles.punchlineText : styles.punchlineTextHidden}>
+          <Text style ={styles.punchlineText}>{showPunchline ? punchline : "Show Punchline"}</Text>
         </View>
       </TouchableOpacity>
     </>
